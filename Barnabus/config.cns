@@ -1,0 +1,44 @@
+;Initialize
+[Statedef 5900]
+type = S
+
+[State reset Vars]
+type = varrangeset
+trigger1 = time <= 0
+value = 0
+first = 1
+last = 59
+
+[State reset FVars]
+type = varrangeset
+trigger1 = time <= 0
+fvalue = 0
+first = 0
+last = 39
+
+[State Store PlayerID]
+type = varadd
+triggerall = (var(2)&33554432) = 0
+trigger1 = enemy,name ="Barnabus"
+trigger1 = enemy,authorname = "Andres Borghi" ;Actually made by Yoshin, name for compatability
+var(2) = 33554432
+
+
+[State Store Costants]
+type = Null
+trigger1 = 1||var(0) := ID ;Store PlayerID
+trigger1 = 1||var(4) := 250 ;Store "Weakened" anim life threshold
+trigger1 = 1||fvar(38) := pos x ;Store initial position for intros
+trigger1 = 1||fvar(39) := pos y
+
+[State Check if VS Final at the end of Arcade ladder]
+type = varadd
+trigger1 = (var(2)&262144) = 0 ;Bit is NOT SET
+trigger1 = enemynear,name = "Final" && matchover && matchno >= 7
+trigger1=!(teammode=simul)&&!(enemy,teammode=simul)
+var(2) = 262144
+
+[State Change to Intro Decider]
+type = changestate
+trigger1 = !time
+value = cond(roundno = 1, 189, 0)

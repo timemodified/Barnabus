@@ -1,0 +1,137 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; DEVELOPMENT NOTES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;; MISCELLANIOUS TIDBITS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;- Standing/Crouching Gethits are usually 3 frames apeice, with maybe 1 additional frame for
+;making the return to idle a tad smoother. Sprite by preferrence
+
+;- Depending on how the frames are drawn, 5040,0/10/20 can reuse sprites from 5030, as wel as reuse
+;srpties in 5040 itself. For example, Norokos Sprite 5040,0 and 5040,20 use the same sprite,
+;Ananzi simply rotates 5010,10 left and uses it for both 5030,20 and slightly edits it for
+;5040,0.
+
+;- Killer Mode is enabled with a kick and punch, but both
+;Buttons must be of the same Strength. It costs 2 bars, and can be
+;Cancelled at any time using the same inputs, and is usually around the
+;State 3000 range
+
+;- Fatal Moves cost 3 bars, and the Opponent must be at 1/3 of their
+;health. The input changes from character to character, but is typically
+;a QCF/B motion followed by 2P/K
+
+;- Light Normals can be cancelled in to each other in a string of 3. This
+;Is true for air normals as well, with standing and crouching normals
+;being capable of cancelling in to each other
+
+;- Heavy normals can cancel in to each other, but the specifics vary.
+;Animus can cancel in to HK from HP, Shar Makai can't at all, Hashi can from
+;CR.HK in to CR.HP, etc. Use as suitable for the character ya making
+
+;- Characters typically have a move that launches, but Shar Makai is an
+;outlier. This move is often times CR.HP, but this can also vary. When
+;connecting with a move that launches, note that this can only be
+;done once per combo, as subsequent connects cause the opponent to fall
+;quickly, assumedly as a form of IPS. This property needn't be exclusive to
+;Normals, as moves such as Shar Makais QCB+2Ps initial hit has the
+;same property
+
+;- Light Normals can cancel in to Heavy Normals, the only exception being 
+;that Shar Makai cannot cancel in to Standing Heavy normals from
+;Crouching light normals
+
+;- Supers can typically be cancelled in to from Special moves, without exception
+;as far as I know
+
+;- You CANNOT combo after throws. The only exception to this being Shar
+;Makais back throw, which can be followed up as if it were a launcher,
+;without actually limiting launching attacks. Seeing as every other throw
+;Is incapable of being extended, a part of me writes this off as an error.
+
+;- Var(10) is widely used in the cast to check if Killer Mode is on. This is
+;especially important in the case of AI. As long as this var is used to check if
+;the mode is active, whether as a whole or via a Bit Check, Var(10)
+;MUST be used to toggle Killer Mode to ensure compatibility with the cast.
+;NOTE: While the mode is active, you don't gain meter. This is done in
+;each hitdef by writing
+;Getpower = value*!var(10)
+
+;- AI gets more difficult as the arcade run progresses. It starts off as LVL1,
+;increasing to LVL2 after the 3rd match, and increasing to LVL3 
+;after the 5th. AI is handled in -1
+
+;- Anim 9999 is typically used for the Super Background of the character
+
+;;;;;;;;;;;;;; FATAL MOVE CUSTOM STUFF ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;--------- HASHI ---------;
+;91250 - Hashi Fatal
+;EXAMPLE ANIM
+;[Begin Action 91250]
+;First frame shows nothing from the
+;neck up, the next has the char
+;cut in half. Usually uses an edited 5062,10
+;frame as the base of both sprites. Alligned at around
+;the mid point
+;9125,10, 0,0, 100
+;9125,11, 0,0, 98
+
+;--------- PEKETO ---------;
+;State 912320 should be in YOUR CHARACTERS FILES. This is because Peketo checks if
+;anim 91230 exists, and if it does, to cut the characters head off. State 912320
+;itself is what happens to the head when it's cut off, allowing for custom behaviour
+;such as Animus laughing
+
+;EXAMPLE ANIMS
+; Peketo Fatal - Held
+;[Begin Action 91230]
+;5031,0, 0,0, 60
+;9123,10, 0,0, 200
+
+; Peketo Fatal - Fall
+;[Begin Action 91231]
+;9123,11, 0,0, 6
+;9123,12, 0,0, -1
+;
+; Peketo Fatal - Hit Ground
+;[Begin Action 91232]
+;9123,13, 0,0, 4
+;9123,14, 0,0, -1
+
+; Peketo Fatal - Decapitated Head
+;[Begin Action 912320]
+;9123,20, 0,0, 5
+;9123,21, 0,0, 5
+;9123,22, 0,0, 5
+;9123,23, 0,0, 5
+;9123,24, 0,0, 5
+;9123,25, 0,0, 5
+;9123,26, 0,0, 5
+;9123,27, 0,0, 5
+
+; Peketo Fatal - Head hit cground
+;[Begin Action 912321]
+;9123,28, 0,0, 3
+;9123,29, 0,0, -1
+
+;9213,10-12 are typically just edited 5031,0, 10 and 20
+;9213,13-14 are simply reused Ground Hit frames, just with t0he head removed, I perso0nally
+;suggest 5040,0 and 10, but use whatever works best.
+;9213,20-27 can be made easier to make by taking any given upright gethit head,
+;rotating it by 45 degrees, and repeating the 2 frames, rotating by 90
+;degrees to get a full rotation
+;9213,28-29 are the frames used for when the head hits the ground
+
+;--------- ANIMUS ---------;
+;9124,10 is simply an edited 5031,0 frame but with the legs missing. The same
+;process is also done for 9124,11 using 5041,10. 9124,20/21 are used for the legs
+;when they're sent flying, the first frame for when in mid-air, the latter for when it
+;hits the ground. Typically 5031,20 is used as the base for the first frame, and 5041,10
+;uis used for the latter as well
+
+;========================================
+;Pasted from Rajaas Urien. Turns out without anything, Mugen just won't run the character. DON'T TOUCH
+;========================================
+[statedef -65536]
+type = A
+ctrl = 0
+[state -65536]
+type = null
+trigger1 = 0

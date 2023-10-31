@@ -1,0 +1,166 @@
+;---------------------- Integer variable list ----------------------
+;---------------------- Integer variable list ----------------------
+
+; var(0):= PlayerID (For the tail helper, mainly)
+; var(1):= Random Number container (For intros/Winposes)
+; var(2):= System Flags
+	;BITWISE BOOLEAN LIST
+;BITS RESERVED FOR MOVE CANCELLING
+;=========================================================
+;	1	;var(x)&1 	  		= LP
+;	2	;var(x)&2 	     		= HP
+;	3	;var(x)&4	    		= LK
+;	4	;var(x)&8 			= HK
+;	5	;var(x)&16 	   		= CR.LP
+;	6	;var(x)&32  	        	= CR.HP
+;	7	;var(x)&64  	        	= CR.LK
+;	8	;var(x)&128  	        	= CR.HK
+;	9	;var(x)&256  	        	= A.LP
+;	10	;var(x)&512  	       	= A.HP
+;	11	;var(x)&1024  	 	= A.LK
+;	12	;var(x)&2048  	 	= A.HK
+;	13	;var(x)&4096  		= SPECIAL
+;	14	;var(x)&8192  		= SUPER
+;	15	;var(x)&16384       	= FATAL MOVE
+;	16	;var(x)&32768  		= JUMP
+;	17	;var(x)&65536 		= KILLER MODE - ON
+;	18	;var(x)&131072 		= SUPER JUMP (In the cast, called "Rave" for some reason)
+;	27	;var(x)&67108864 		= KILLER MODE - OFF
+;	28	;var(x)&134217728 		= SELF
+;=========================================================
+;	19	;var(x)&262144 		= VS Final at the end of the Arcade ladder
+;=========================================================
+;Characters in The Black Heart can cancel in to different Light normals, but only
+;Up to 3 times. These 2 Bits are used to keep track of this
+;=========================================================
+;	20	;var(x)&524288 		= Light Chain Cancelling counter 1
+;	21	;var(x)&1048576 		= Light Chain Cancelling counter 2
+;=========================================================
+;The AI system makes use of 2 vars, one for the "difficulty", and one to actually check
+;if AI is enabled. This can be condensed in to 3 bits as there are 2 levels, and 1 bit
+;can be used to check if it's on
+;=========================================================
+;	22	;var(x)&2097152 		= AI Boolean
+;	23	;var(x)&4194304 		= AI "Difficulty" 1
+;	24	;var(x)&8388608 		= AI "Difficulty" 2
+;=========================================================
+;	25	;var(x)&16777216 		= Hit with "Launcher"
+;	26	;var(x)&33554432 		= Check if facing Self
+;	29	;var(x)&268435456 		= Fatal Text Facing
+;	30	;var(x)&536870912 	=
+;	31	;var(x)&-2147483648	=
+; var(3):= Light Normal limiter (can cancel in to light normals 3 times per string)
+; var(4):= "Weakened" anim life threshold"
+; var(5):= Temp Var 1
+; var(6):= Temp Var 2
+; var(7):= Temp Var 3
+; var(8):= Temp Var 4
+; var(9):= Temp Var 5
+;var(10):= Darkforce Active Check (Universal among the cast)
+;var(11):= CR_HP limiter
+;var(12):= 
+;var(13):= 
+;var(14):= 
+;var(15):= 
+;var(16):= 
+;var(17):= 
+;var(18):= 
+;var(19):= 
+;var(20):= 
+;var(21):= 
+;var(22):= 
+;var(23):= 
+;var(24):= AI "Difficulty" (Universal among the cast)
+;var(25):= 
+;var(26):= 
+;var(27):= 
+;var(28):= 
+;var(29):= 
+;var(30):= 
+;var(31):= 
+;var(32):= 
+;var(33):= Fatal Text facing
+;var(34):= 
+;var(35):= 
+;var(36):= 
+;var(37):= 
+;var(38):= 
+;var(39):= 
+;var(40):= 
+;var(41):= 
+;var(42):= 
+;var(43):= 
+;var(44):= 
+;var(45):= 
+;var(46):= 
+;var(47):= 
+;var(48):= 
+;var(49):= 
+;var(50):= 
+;var(51):= 
+;var(52):= 
+;var(53):= 
+;var(54):= 
+;var(55):= 
+;var(56):= 
+;var(57):= 
+;var(58):= 
+;var(59):= 
+
+;---------------------- Float variable list ----------------------
+
+; fvar(0):= 5900
+; fvar(1):= TEMP
+; fvar(2):= TEMP
+; fvar(3):= TEMP
+; fvar(4):= TEMP
+; fvar(5):= TEMP
+; fvar(6):= 
+; fvar(7):= 
+; fvar(8):= 
+; fvar(9):= 
+;fvar(10):= 
+;fvar(11):= 
+;fvar(12):= 
+;fvar(13):= 
+;fvar(14):= 
+;fvar(15):= 
+;fvar(16):= 
+;fvar(17):= 
+;fvar(18):= 
+;fvar(19):= 
+;fvar(20):= 
+;fvar(21):= 
+;fvar(22):= 
+;fvar(23):= 
+;fvar(24):= 
+;fvar(25):= 
+;fvar(26):= 
+;fvar(27):= 
+;fvar(28):= 
+;fvar(29):= 
+;fvar(30):= 
+;fvar(31):= 
+;fvar(32):= 
+;fvar(33):= 
+;fvar(34):= 
+;fvar(35):= 
+;fvar(36):= 
+;fvar(37):= 
+;fvar(38):= Initial X Pos
+;fvar(39):= Initial Y Pos 
+
+;;;; CHANNELS
+;0 - Voice
+;30 - Intros
+
+
+;========================================
+;Pasted from Rajaas Urien. Turns out without anything, Mugen just won't run the character. DON'T TOUCH
+;========================================
+[statedef -65536]
+type = A
+ctrl = 0
+[state -65536]
+type = null
+trigger1 = 0

@@ -1,0 +1,47 @@
+; Player information
+[Info]
+name ="Barnabus"
+displayname ="BARNABUS"
+versiondate =09,01,20015
+mugenversion =1.0
+author ="Andres Borghi" ;Actually made by Yoshin, name for compatability
+pal.defaults =1,2,3
+
+; Files for the player
+[Files]
+cmd      = code/Barnabus.cmd
+cns      = code/Barnabus.cns
+stcommon = common1.cns
+sprite   = files/Barnabus.sff
+anim     = files/Barnabus.air
+sound    = files/Barnabus.snd
+st 	 = code/Barnabus.cns
+st1 	 = code/Barnabus-com.cns
+st2 	 = code/varlist.txt
+st3	 = code/states -2-3.cns
+st4	 = config.cns
+st5	 = code/Ending stuff.cns
+st6	 = DEVELOPMENT NOTES.txt
+;movelist = movelist-eng.dat     ;Ikemen feature: Movelist
+
+
+
+pal1	 = palletes/Barnabus_1-1.act ;P1
+pal2	 = palletes/Barnabus_1-2.act ;P2
+pal3	 = palletes/Barnabus_1-3.act ;Inspired by earlier Concept Art
+pal4	 = palletes/Barnabus_1-4.act
+;Baranabus 5-7 by HB
+pal5	 = palletes/Barnabus_1-5.act ;Tizoc
+pal6	 = palletes/Barnabus_1-6.act ;Artificial Eva Unit
+pal7	 = palletes/Barnabus_1-7.act ;Nosferatu Zodd
+;Baranabus 8-11 by RenGod
+pal8	 = palletes/Barnabus_1-8.act
+pal9	 = palletes/Barnabus_1-9.act
+pal10	 = palletes/Barnabus_1-10.act
+pal11	 = palletes/Barnabus_1-11.act
+pal12	 = palletes/Barnabus_1-12.act
+
+[Arcade]
+;intro.storyboard = storyboards/intro-eng.def
+;ending.storyboard = storyboards/ending-eng.def
+;arcadepath = arcade.lua

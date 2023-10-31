@@ -1,0 +1,217 @@
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+
+[Statedef -2]
+
+[State AI trigger]
+type = Null
+trigger1 = var(2) := var(2) + 2097152*(AILevel!=0 && (var(2)&2097152)=0)
+
+[State Reset Light chain Bits]
+type = VarAdd
+trigger1 = ctrl
+var(2) = -(var(2)&1572864)
+
+[State Reset Launcher Limiter]
+type = VarAdd
+trigger1 = enemy, movetype != h
+trigger1 = 1 || var(11) := 0 ;Reset CR_HP Limiter
+var(2) = -(var(2)&16777216)
+ignorehitpause = 1
+
+[state Test explod]
+type = explod
+triggerall = 0;!numexplod(29875)
+;trigger1 = (var(2)&16777216) !=0
+;trigger1 = anim = 2
+trigger1 = NUMHELPER(11001)
+id = 29875
+anim = 29875
+pos = 120,78
+postype = left
+removetime = 1
+bindtime = -1
+pausemovetime = 99999999
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State Gethit Voice]
+type = PlaySnd
+triggerall = time = 1 && alive
+trigger1 = random < 500
+trigger1 = (stateno = 5000)||(stateno = 5020)||(stateno = 5070)||(stateno = 5080)
+value = 11,ifelse(random<333,1,ifelse(random<500,2,3))
+channel = 0
+volume = 150
+;freqmul = 0.9+(random/3333.3)
+ignorehitpause = 1
+
+
+[State Reset cancel Bits]
+type = null
+triggerall = (var(2)&201588735) != 0
+trigger1 = 1 || var(2) := var(2) - (var(2)&201588735)
+ignorehitpause = 1
+
+[State Set cancel Bits]
+type = null
+triggerall = (var(2)&201588735) = 0 ;To ENSURE no overflow
+;	1	;var(x)&1 	  		= LP
+;	2	;var(x)&2 	     		= HP
+;	3	;var(x)&4	    		= LK
+;	4	;var(x)&8 			= HK
+;	5	;var(x)&16 	   		= CR.LP
+;	6	;var(x)&32  	        	= CR.HP
+;	7	;var(x)&64  	        	= CR.LK
+;	8	;var(x)&128  	        	= CR.HK
+;	9	;var(x)&256  	        	= A.LP
+;	10	;var(x)&512  	       	= A.HP
+;	11	;var(x)&1024  	 	= A.LK
+;	12	;var(x)&2048  	 	= A.HK
+;	13	;var(x)&4096  		= SPECIAL
+;	14	;var(x)&8192  		= SUPER
+;	15	;var(x)&16384       	= FATAL MOVE
+;	16	;var(x)&32768  		= JUMP
+;	17	;var(x)&65536 		= KILLER MODE - ON
+;	18	;var(x)&131072 		= SUPER JUMP (In the cast, called "Rave" for some reason)
+;	27	;var(x)&67108864 		= KILLER MODE - OFF
+;	28	;var(x)&134217728 		= SELF
+triggerall = time > 1
+triggerall = (movetype = A && movecontact && animelemtime(1) > 0)
+;Light S Normals
+trigger1 = (stateno = 200 || stateno = 230)
+trigger1 = 	1 || var(2) := var(2) + 67137791
+;Heavy S Normals
+trigger2 = (stateno = 210 || stateno = 240)
+trigger2 = 	1 || var(2) := var(2) + 67137536+65536
+;Light C Normals
+trigger3 = (stateno = 400 || stateno = 430)
+trigger3 = 	1 || var(2) := var(2) + 67137791
+;Heavy C Normals
+trigger4 = (stateno = 410 || stateno = 440)
+trigger4 = 	1 || var(2) := var(2) + 67137536 +(32768*(stateno = 440))
+;Light A Normals
+trigger5 = (stateno = 600 || stateno = 630)
+trigger5 = 	1 || var(2) := var(2) + 67141376
+;Heavy A Normals
+trigger6 = (stateno = 610 || stateno = 640)
+trigger6 = 	1 || var(2) := var(2) + 67137536 +(2048*(stateno = 610))
+ignorehitpause = 1
+
+[State Set Killer De-activate cancel Exceptions]
+type = varadd
+triggerall = (var(2)&67108864) = 0
+trigger1 = movecontact
+trigger2 = stateno = 410 && animelemtime(4) >= 0 ;CR_HP
+trigger3 = (stateno = 1100) && (anim = stateno + (var(5)*3) + 1) && (numhelper(11000)) ;Split Scream
+trigger4 = stateno = 2000 && anim = stateno + 1 ;Hell Hound
+var(2) = 67108864
+
+;[State Set Special cancel Exceptions]
+;type = varadd
+;triggerall = (var(2)&4096) = 0
+;trigger1 = stateno = 410 && animelemtime(4) >= 0 ;CR_HP
+;trigger2 = (stateno = 1100) && (anim = stateno + (var(5)*3) + 1) && (numhelper(11000)) ;Split Scream
+;var(2) = 4096
+
+[State Set Super cancel Exceptions]
+type = varadd
+triggerall = (var(2)&8192) = 0
+trigger1 = (stateno = 1100) && (anim = stateno + (var(5)*3) + 1) && (numhelper(11000)) ;Split Scream
+var(2) = 8192
+
+[State Set Special/Super cancel Exceptions]
+type = varadd
+triggerall = (var(2)&12288) = 0
+trigger1 = stateno = 410 && animelemtime(4) >= 0 ;CR_HP
+var(2) = 12288
+
+[State Mute SNDs from Intros]
+type = StopSnd
+trigger1 = roundstate = 2
+channel = 30
+
+;-----------------------
+;FATAL TEXT
+;-----------------------
+[State 0, VarSet]
+type = Varset
+trigger1 = roundstate = 0 && facing = 1
+var(33)=1
+
+[State 0, Helper]
+type = Helper
+triggerall = power >= 3000
+triggerall= enemy,life<=330
+triggerall = roundstate = 2
+trigger1 = numhelper(1999) = 0
+helpertype = normal
+name = "texto-fatal"
+ID = 1999
+stateno = 1999
+;pos = ifelse(var(33)=1,55,255),210
+;postype = left
+facing = ifelse(var(33),1,-1)
+keyctrl = 0
+ownpal = 1
+supermovetime = 50000
+pausemovetime = 50000
+
+[State 0, SndPan]
+type = SndPan
+trigger1 = 1
+channel = 0
+pan = 0
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+;[State Tail]
+;type = helper
+;trigger1 = !numhelper(13)
+;id = 13
+;stateno = 13
+;pos = 0,0
+;spostype = P1
+
+[State Killer Mode PalFX]
+type = PalFX
+triggerall = var(10)
+trigger1 = time%66 = 0
+time = 66
+add = 22,0,22
+mul = 255,255,255
+sinadd = -20,-20,-33,66
+invertall = 0
+color = 222
+
+
+;This controller plays a sound everytime KFM lands from a jump, or
+;from his back-dash.
+[State Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 52 ;Jump land
+trigger2 = stateno = 106 ;Run-back land
+value = 40, 0
+
+[State Lose Meter during Killer Mode]
+type = PowerAdd
+triggerall = var(10) != 0
+trigger1 = roundstate = 2
+value = -3
+
+
+[State Walk SNDs]
+type = PlaySnd
+trigger1 = anim = 20 && animelem = 3
+trigger2 = anim = 20 && animelem = 5
+trigger3 = anim = 21 && animelem = 4
+trigger4 = anim = 21 && animelem = 6
+value = 40,0
+;volume = -100
+;freqmul = 0.7+(random/2000.0)

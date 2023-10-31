@@ -1,0 +1,773 @@
+;---------------------------------------------------------------------------
+;ENDING VS Final: Fade to white
+[Statedef 4499]
+type = S
+ctrl = 0
+SprPriority = 0
+
+[State 182, 1]
+type = AssertSpecial
+trigger1 = 1
+flag = roundnotover
+
+;blanco full
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 4507
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+removetime = 250
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time = 250
+value = 4500
+ctrl = 0
+
+;---------------------------------------------------------------------------
+;ENDING - borrar en regular mugen
+[Statedef 4500]
+type = S
+ctrl = 0
+SprPriority = 0
+
+;-----------------
+;password hard mode
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time = 7320
+trigger1 = enemynear, var(24)=2
+value = 4550
+ctrl = 0
+;-----------------
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nobardisplay
+flag2 = noBG
+flag3 = noFG
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nomusic
+
+[State 182, 1]
+type = AssertSpecial
+trigger1 = time < 7320
+flag = roundnotover
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = !time
+value = f 100,0
+loop = 1
+
+;PELICULA VIEJA
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 4505
+pos = 160,0
+postype = left
+ownpal = 1
+sprpriority = 8
+removetime = -1
+
+;ruido
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 4506
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 8
+removetime = -1
+
+;WIDESCREEN
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = 4500
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 9
+
+;ESC 1
+;-----
+
+;Negro in
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = 4501
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+
+;nubes 1-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4510
+
+;nubes 1-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+trigger2 = time = 580
+trigger3 = time = 1160
+anim = 4510
+pos = 580,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4510
+
+;ANANZI frente
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = 4511
+pos = -40,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0.05
+iD = 4510
+
+;dialogo 1
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = 4600
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 2
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 1180
+id = 4510
+
+;nubes 2-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 1180
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = 1,0
+iD = 4520
+
+;nubes 2-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 1180
+trigger2 = time = 1760
+trigger3 = time = 2340
+anim = 4510
+pos = -580,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = 1,0
+iD = 4520
+
+;FINAL lejos
+[State 3900, 1]
+type = Explod
+trigger1 = time = 1180
+anim = 4520
+pos = 70,0
+postype = left
+sprpriority = 3
+removetime = -1
+vel = 0.13,0
+iD = 4520
+
+;ananzi atras
+[State 3900, 1]
+type = Explod
+trigger1 = time = 1180
+anim = 4521
+pos = 250,0
+postype = left
+sprpriority = 4
+removetime = -1
+vel = -0.13,0
+iD = 4520
+
+;dialogo 2
+[State 3900, 1]
+type = Explod
+trigger1 = time = 1180
+anim = 4604
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 3
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 2640
+id = 4520
+
+;nubes 3-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 2640
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = 1,0
+iD = 4530
+
+;nubes 3-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 2640
+trigger2 = time = 3220
+anim = 4510
+pos = -580,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = 1,0
+iD = 4530
+
+;FINAL cerca
+[State 3900, 1]
+type = Explod
+trigger1 = time = 2640
+anim = 4530
+pos = 50,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4530
+
+;LUCES
+[State 3900, 1]
+type = Explod
+trigger1 = time = 2640
+anim = 4531
+pos = 50,0
+postype = left
+sprpriority = 6
+removetime = -1
+vel = 0.2,0
+iD = 4530
+
+;Negro out
+[State 3900, 1]
+type = Explod
+trigger1 = time = 3130
+anim = 4502
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 5
+iD = 4530
+
+;Negro out 2
+[State 3900, 1]
+type = Explod
+trigger1 = time = 3700
+anim = 4502
+pos = 0,0
+postype = left
+sprpriority = 7
+iD = 4530
+
+;dialogo 3
+[State 3900, 1]
+type = Explod
+trigger1 = time = 2640
+anim = 4609
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 4
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 3740
+id = 4530
+
+;Negro in
+[State 3900, 1]
+type = Explod
+trigger1 = time = 3740
+anim = 4501
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+
+;janos corazon
+[State 3900, 1]
+type = Explod
+trigger1 = time = 3740
+anim = 4540
+pos = 0,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = -0.2,0
+iD = 4540
+
+;dialogo 4
+[State 3900, 1]
+type = Explod
+trigger1 = time = 3740
+anim = 4613
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 5
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 4720
+id = 4540
+
+;Negro in
+[State 3900, 1]
+type = Explod
+trigger1 = time = 4720
+anim = 4501
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+
+;nubes 1-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 4720
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4550
+
+;nubes 1-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 4720
+trigger2 = time = 5300
+anim = 4510
+pos = 580,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4550
+
+;ANANZI cara
+[State 3900, 1]
+type = Explod
+trigger1 = time = 4720
+anim = 4550
+pos = 0,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4550
+
+;dialogo 5
+[State 3900, 1]
+type = Explod
+trigger1 = time = 4720
+anim = 4616
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 6
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 5600
+id = 4550
+
+;nubes 1-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5600
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -0.8,0
+iD = 4560
+
+;ANANZI detalle 1
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5600
+anim = 4560
+pos = 0,-215
+postype = left
+sprpriority = 2
+removetime = 70
+vel = 0,3
+iD = 4560
+
+;ANANZI detalle 2
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5670
+anim = 4561
+pos = 0,0
+postype = left
+sprpriority = 2
+removetime = -1
+iD = 4560
+
+;destello rojo
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5670
+anim = 4562
+pos = 0,0
+postype = left
+sprpriority = 5
+iD = 4560
+
+;ESC 7
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 5770
+id = 4560
+
+;Negro in
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4501
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+
+;nubes 1-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4510
+pos = 0,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4570
+
+;nubes 1-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+trigger2 = time = 6350
+anim = 4510
+pos = 580,0
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4570
+
+;sharma 1
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4571
+pos = 0,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;sharma 2
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4571
+pos = 120,10
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;sharma 3
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4571
+pos = -80,20
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;sharma 4
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4571
+pos = -160,10
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;sharma 5
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4571
+pos = 200,10
+postype = left
+sprpriority = 2
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;ANANZI atacada
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4570
+pos = 0,0
+postype = left
+sprpriority = 3
+removetime = -1
+vel = 0.2,0
+iD = 4570
+
+;dialogo 6
+[State 3900, 1]
+type = Explod
+trigger1 = time = 5770
+anim = 4619
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;ESC 8
+;-----
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 6570
+id = 4570
+
+;Negro in
+[State 3900, 1]
+type = Explod
+trigger1 = time = 6570
+anim = 4501
+pos = 0,0
+postype = left
+ownpal = 1
+ontop = 1
+
+;nubes 1-1 (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 6570
+anim = 4510
+pos = 0,-150
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4580
+
+;nubes 1-constante (ancho = 580)
+[State 3900, 1]
+type = Explod
+trigger1 = time = 6570
+trigger2 = time = 7150
+anim = 4510
+pos = 580,-150
+postype = left
+sprpriority = 1
+removetime = -1
+vel = -1,0
+iD = 4580
+
+;ANANZI atacada
+[State 3900, 1]
+type = Explod
+trigger1 = time = 6570
+anim = 4580
+pos = 0,0
+postype = left
+sprpriority = 2
+removetime = -1
+vel = -0.15,0
+iD = 4580
+
+;dialogo 6
+[State 3900, 1]
+type = Explod
+trigger1 = time = 6570
+anim = 4621
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 10
+
+;---------------------------------------------------------------------------
+; PASSWORD HARD MODE
+[Statedef 4550]
+type = S
+ctrl = 0
+velset = 0,0
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nobardisplay
+flag2 = noBG
+flag3 = noFG
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nomusic
+
+[State 182, 1]
+type = AssertSpecial
+trigger1 = time < 800
+flag = roundnotover
+
+;fondo
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 3150
+pos = 182,179
+postype = left
+ownpal = 1
+sprpriority = 10
+removetime = -1
+
+;LETRA 01
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 3215
+pos = 195,179
+postype = left
+ownpal = 1
+sprpriority = 11
+removetime = -1
+
+;LETRA 02
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 3213
+pos = 204,179
+postype = left
+ownpal = 1
+sprpriority = 11
+removetime = -1
+
+;LETRA 03
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 3210
+pos = 213,179
+postype = left
+ownpal = 1
+sprpriority = 11
+removetime = -1
+
+;LETRA 04
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 3208
+pos = 222,179
+postype = left
+ownpal = 1
+sprpriority = 11
+removetime = -1
+
+;NEGRO IN
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 4510
+pos = 0,0
+postype = left
+ownpal = 1
+sprpriority = 12
+
+;PELICULA VIEJA
+[State 3900, 1]
+type = Explod
+trigger1 = !time
+anim = f 4505
+pos = 160,0
+postype = left
+ownpal = 1
+sprpriority = 11
+removetime = -1
+
+
